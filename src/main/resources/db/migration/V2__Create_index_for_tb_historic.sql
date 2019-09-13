@@ -1,0 +1,1 @@
+CREATE INDEX idx_tb_historic_dna ON tb_historic (ds_dna);

@@ -1,0 +1,4 @@
+CREATE TABLE tb_historic (
+    id BIGINT (30) PRIMARY KEY AUTO_INCREMENT,
+    ds_dna VARCHAR NOT NULL
+);
