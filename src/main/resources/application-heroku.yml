@@ -1,0 +1,16 @@
+spring:
+  # Database
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://ec2-54-235-92-43.compute-1.amazonaws.com:5432/dbpl9cnormng5v
+    username: jpyoqbxsrfyikf
+    password: a6e88b00343ed5f4ba8c5d1e127a7b7ed03835037e98e424bc17cf96b0ef3b6c
+  # JPA properties
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+    generate-ddl: false
