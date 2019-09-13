@@ -12,7 +12,7 @@ public class Historic {
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
     @Column(name = "ds_dna", updatable = false, nullable = false)
-    private String[] dna;
+    private String dna;
 
     public Long getId() {
         return id;
@@ -22,11 +22,11 @@ public class Historic {
         this.id = id;
     }
 
-    public String[] getDna() {
+    public String getDna() {
         return dna;
     }
 
-    public void setDna(String[] dna) {
+    public void setDna(String dna) {
         this.dna = dna;
     }
 
@@ -34,7 +34,7 @@ public class Historic {
     public String toString() {
         return "Historic{" +
                 "id=" + id +
-                ", dna=" + Arrays.toString(dna) +
+                ", dna='" + dna + '\'' +
                 '}';
     }
 }

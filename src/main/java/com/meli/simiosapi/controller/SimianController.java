@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,24 +32,26 @@ public class SimianController {
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> create(SimianRequest request) {
+    public ResponseEntity<?> create(@RequestBody SimianRequest request) {
         Historic historic = new Historic();
 //        String[] dna = request.getDna().toArray(new String[request.getDna().size()]);
-        String[] dna = {"CTGAGA", "CTGAGC", "TATTGT", "AGGGGG", "CCCCTA", "TCACTG"};
-//        historic.setId(1L);
-        historic.setDna(dna);
+        historic.setDna(request.getDna().toString());
         log.info("Saving historic with dna: " + historic.getDna());
 
-        if(repository.findAll().size() > 0){
-            Optional<Historic> optionalHistoric = repository.findAll()
-                    .stream()
-                    .filter(h -> Arrays.equals(h.getDna(), historic.getDna()))
-                    .findFirst();
+//        if(repository.findAll().size() > 0){
+//            Optional<Historic> optionalHistoric = repository.findAll()
+//                    .stream()
+//                    .filter(h -> h.getDna().equals(historic.getDna()))
+//                    .findFirst();
+//
+//            if(optionalHistoric.isPresent()){
+//                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+//            }
+//
+//        }
 
-            if(optionalHistoric.isPresent()){
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-            }
-
+        if(repository.findByDna(historic.getDna()).size() > 0){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
         return ResponseEntity.ok(repository.save(historic));

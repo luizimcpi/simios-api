@@ -1,4 +1,4 @@
-CREATE TABLE tb_historic (
-    id BIGINT (30) PRIMARY KEY AUTO_INCREMENT,
-    ds_dna VARCHAR NOT NULL
+CREATE TABLE tb_historic(
+   id serial PRIMARY KEY,
+   ds_dna VARCHAR (355) UNIQUE NOT NULL
 );
