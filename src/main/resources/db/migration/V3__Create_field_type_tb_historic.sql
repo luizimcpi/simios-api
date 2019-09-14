@@ -1,0 +1,2 @@
+ALTER TABLE tb_historic
+ADD COLUMN type VARCHAR;

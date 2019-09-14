@@ -1,4 +1,4 @@
-package com.meli.simiosapi.contracts;
+package com.meli.simiosapi.contracts.request;
 
 import java.util.List;
 

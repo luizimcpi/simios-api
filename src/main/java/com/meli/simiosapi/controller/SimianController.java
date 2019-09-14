@@ -1,8 +1,9 @@
 package com.meli.simiosapi.controller;
 
-import com.meli.simiosapi.contracts.SimianRequest;
+import com.meli.simiosapi.contracts.request.SimianRequest;
 import com.meli.simiosapi.domain.Historic;
-import com.meli.simiosapi.repository.HistoricRepository;
+import com.meli.simiosapi.enuns.SpecieType;
+import com.meli.simiosapi.service.HistoricService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,47 +15,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
-import java.util.Map;
-import java.util.Optional;
-
 @RestController
 @RequestMapping("/simian")
 public class SimianController {
 
     private static final Logger log = LoggerFactory.getLogger(SimianController.class);
 
-    private final HistoricRepository repository;
+    private final HistoricService service;
 
     @Autowired
-    public SimianController(HistoricRepository repository) {
-        this.repository = repository;
+    public SimianController(HistoricService service) {
+        this.service = service;
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> create(@RequestBody SimianRequest request) {
-        Historic historic = new Historic();
-//        String[] dna = request.getDna().toArray(new String[request.getDna().size()]);
-        historic.setDna(request.getDna().toString());
-        log.info("Saving historic with dna: " + historic.getDna());
+        log.info("Saving historic with dna: " + request.getDna());
 
-//        if(repository.findAll().size() > 0){
-//            Optional<Historic> optionalHistoric = repository.findAll()
-//                    .stream()
-//                    .filter(h -> h.getDna().equals(historic.getDna()))
-//                    .findFirst();
-//
-//            if(optionalHistoric.isPresent()){
-//                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-//            }
-//
-//        }
+        if(service.dnaExists(request.getDna().toString())){
+            log.info("Dna already exists: " + request.getDna());
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
 
-        if(repository.findByDna(historic.getDna()).size() > 0){
+        if(!service.isSimian(request.getDna())){
+            log.info("Saving human Dna: " + request.getDna());
+            service.save(request.getDna().toString(), SpecieType.HUMAN.toString());
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
-        return ResponseEntity.ok(repository.save(historic));
+        log.info("Saving simian Dna: " + request.getDna());
+        service.save(request.getDna().toString(), SpecieType.SIMIAN.toString());
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
 }
