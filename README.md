@@ -42,7 +42,7 @@ http://localhost:8080/simian
 GET STATS EXAMPLE (LOCAL):
 
 ```
-POST
+GET
 http://localhost:8080/stats
 ```
 
@@ -65,6 +65,6 @@ https://simios-api.herokuapp.com/simian
 GET STATS EXAMPLE (LOCAL):
 
 ```
-POST
+GET
 https://simios-api.herokuapp.com/stats
 ```
