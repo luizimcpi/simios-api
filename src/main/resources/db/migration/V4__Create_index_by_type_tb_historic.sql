@@ -1,0 +1,1 @@
+CREATE INDEX idx_tb_historic_type ON tb_historic (type);

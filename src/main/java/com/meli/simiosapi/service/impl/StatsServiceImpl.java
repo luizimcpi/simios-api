@@ -1,6 +1,7 @@
 package com.meli.simiosapi.service.impl;
 
 import com.meli.simiosapi.contracts.response.StatsResponse;
+import com.meli.simiosapi.enuns.SpecieType;
 import com.meli.simiosapi.repository.HistoricRepository;
 import com.meli.simiosapi.service.StatsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +21,15 @@ public class StatsServiceImpl implements StatsService {
 
     @Override
     public StatsResponse getStats() {
-//        DecimalFormat df = new DecimalFormat("#.0");
-
-        Integer countHumanDna = 100;
-        Integer countMutantDna = 40;
+        Long countHumanDna = repository.countByType(SpecieType.HUMAN.toString());
+        Long countMutantDna = repository.countByType(SpecieType.SIMIAN.toString());
         double ratio = countMutantDna / countHumanDna;
-//        ratio = Double.parseDouble(df.format(ratio));
-        StatsResponse reponse = StatsResponse.builder().countHumanDna(40).countMutantDna(100).ratio(ratio).build();
+
+        StatsResponse reponse = StatsResponse.builder()
+                .countHumanDna(countHumanDna)
+                .countMutantDna(countMutantDna)
+                .ratio(ratio).build();
+
         return reponse;
     }
 }

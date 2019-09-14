@@ -1,30 +1,30 @@
 package com.meli.simiosapi.contracts.response;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.meli.simiosapi.contracts.response.StatsResponse.StatsResponseBuilder.aStatsResponse;
 
 public class StatsResponse {
 
-    @JsonAlias("count_mutant_dna")
-    private Integer countMutantDna;
-    @JsonAlias("count_human_dna")
-    private Integer countHumanDna;
+    @JsonProperty("count_mutant_dna")
+    private Long countMutantDna;
+    @JsonProperty("count_human_dna")
+    private Long countHumanDna;
     private double ratio;
 
-    public Integer getCountMutantDna() {
+    public Long getCountMutantDna() {
         return countMutantDna;
     }
 
-    public void setCountMutantDna(Integer countMutantDna) {
+    public void setCountMutantDna(Long countMutantDna) {
         this.countMutantDna = countMutantDna;
     }
 
-    public Integer getCountHumanDna() {
+    public Long getCountHumanDna() {
         return countHumanDna;
     }
 
-    public void setCountHumanDna(Integer countHumanDna) {
+    public void setCountHumanDna(Long countHumanDna) {
         this.countHumanDna = countHumanDna;
     }
 
@@ -61,12 +61,12 @@ public class StatsResponse {
         }
 
 
-        public StatsResponse.StatsResponseBuilder countMutantDna(Integer countMutantDna) {
+        public StatsResponse.StatsResponseBuilder countMutantDna(Long countMutantDna) {
             statsResponse.setCountMutantDna(countMutantDna);
             return this;
         }
 
-        public StatsResponse.StatsResponseBuilder countHumanDna(Integer countHumanDna) {
+        public StatsResponse.StatsResponseBuilder countHumanDna(Long countHumanDna) {
             statsResponse.setCountHumanDna(countHumanDna);
             return this;
         }

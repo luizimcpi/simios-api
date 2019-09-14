@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface HistoricRepository extends JpaRepository<Historic, Long> {
     List<Historic> findByDna(String dna);
+    Long countByType(String type);
 }
