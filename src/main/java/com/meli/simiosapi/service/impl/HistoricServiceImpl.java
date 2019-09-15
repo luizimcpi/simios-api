@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class HistoricSevriceImpl implements HistoricService {
+public class HistoricServiceImpl implements HistoricService {
 
     private final HistoricRepository repository;
 
     @Autowired
-    public HistoricSevriceImpl(HistoricRepository repository) {
+    public HistoricServiceImpl(HistoricRepository repository) {
         this.repository = repository;
     }
 

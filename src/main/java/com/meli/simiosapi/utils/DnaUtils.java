@@ -30,7 +30,6 @@ public class DnaUtils {
         int contadorSequenciaLinha = 0;
         int contadorSequenciaColuna = 0;
         int contadorSequenciaDiagonal = 0;
-        int contadorSequenciaDiagonalInversa = 0;
         String lastChar = "";
         contadorSequenciaLinha = getContadorSequencia(matrizDNA, caracterSequencia, contadorSequencia, lastChar, true);
         if (contadorSequenciaLinha <= 1){
@@ -39,16 +38,12 @@ public class DnaUtils {
 
             if(contadorSequenciaLinha + contadorSequenciaColuna <= 1) {
                 contadorSequencia = 0;
-                contadorSequenciaDiagonal = getContadorSequenciaDiagonal(matrizDNA, caracterSequencia, contadorSequencia, lastChar, false);
+                contadorSequenciaDiagonal = getContadorSequenciaDiagonal(matrizDNA, caracterSequencia, contadorSequencia, lastChar);
 
-                if(contadorSequenciaLinha + contadorSequenciaColuna + contadorSequenciaDiagonal <= 1) {
-                    contadorSequencia = 0;
-                    contadorSequenciaDiagonalInversa = getContadorSequenciaDiagonal(matrizDNA, caracterSequencia, contadorSequencia, lastChar, true);
-                }
             }
         }
 
-        if(contadorSequenciaLinha + contadorSequenciaColuna + contadorSequenciaDiagonal + contadorSequenciaDiagonalInversa > 1 ) {
+        if(contadorSequenciaLinha + contadorSequenciaColuna + contadorSequenciaDiagonal > 1 ) {
             return true;
         }
 
@@ -97,7 +92,7 @@ public class DnaUtils {
         return contadorSequencia;
     }
 
-    private static int getContadorSequenciaDiagonal(String[][] matrizDNA, int caracterSequencia, int contadorSequencia, String lastChar, boolean diagonalInversa) {
+    private static int getContadorSequenciaDiagonal(String[][] matrizDNA, int caracterSequencia, int contadorSequencia, String lastChar) {
         int linha = 0;
         int z = 0;
         for(int i = 0; i < matrizDNA.length && linha < matrizDNA.length; i++){

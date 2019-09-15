@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionController {
 
     @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<ErrorMessageResponse> handleConflictsException(Exception e) {
+    public ResponseEntity<ErrorMessageResponse> handleBadRequestException(Exception e) {
         ErrorMessageResponse errorMessage = new ErrorMessageResponse();
         errorMessage.setMessage(e.getMessage());
         return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
