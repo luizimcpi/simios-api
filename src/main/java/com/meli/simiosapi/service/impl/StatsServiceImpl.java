@@ -2,6 +2,7 @@ package com.meli.simiosapi.service.impl;
 
 import com.meli.simiosapi.contracts.response.StatsResponse;
 import com.meli.simiosapi.enuns.SpecieType;
+import com.meli.simiosapi.exception.BadRequestException;
 import com.meli.simiosapi.repository.HistoricRepository;
 import com.meli.simiosapi.service.StatsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class StatsServiceImpl implements StatsService {
     public StatsResponse getStats() {
         Long countHumanDna = repository.countByType(SpecieType.HUMAN.toString());
         Long countMutantDna = repository.countByType(SpecieType.SIMIAN.toString());
+        if(countHumanDna == 0){
+            throw new BadRequestException("Base não possui registros suficientes para emissão de estatísticas...");
+        }
         double ratio = countMutantDna / countHumanDna;
 
         StatsResponse reponse = StatsResponse.builder()
