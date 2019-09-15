@@ -8,6 +8,8 @@ import com.meli.simiosapi.service.StatsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 @Service
@@ -27,12 +29,15 @@ public class StatsServiceImpl implements StatsService {
         if(countHumanDna == 0){
             throw new BadRequestException("Base não possui registros suficientes para emissão de estatísticas...");
         }
-        double ratio = countMutantDna / countHumanDna;
+        BigDecimal humans = new BigDecimal(countHumanDna);
+        BigDecimal mutants = new BigDecimal(countMutantDna);
+
+        BigDecimal ratio =  mutants.divide(humans, 2, RoundingMode.CEILING);
 
         StatsResponse reponse = StatsResponse.builder()
                 .countHumanDna(countHumanDna)
                 .countMutantDna(countMutantDna)
-                .ratio(ratio).build();
+                .ratio(ratio.doubleValue()).build();
 
         return reponse;
     }

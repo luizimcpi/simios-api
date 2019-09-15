@@ -20,10 +20,9 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class HistoricServiceTests {
 
-    private static final String VALID_SIMIAN_DNA = Arrays.asList("CTGAGA", "CTATGC", "TATTGT", "AGAGGG", "CCCCTA", "TCACTG").toString();
-
+    private static final List<String> VALID_SIMIAN_DNA_LIST = Arrays.asList("CTGAGA", "CTATGC", "TATTGT", "AGAGGG", "CCCCTA", "TCACTG");
+    private static final String VALID_SIMIAN_DNA = VALID_SIMIAN_DNA_LIST.toString();
     private static final List<Historic> VALID_HISTORIC_LIST = new ArrayList<>();
-
     private static final List<Historic> EMPTY_HISTORIC_LIST = new ArrayList<>();
 
     @Mock
@@ -48,5 +47,10 @@ public class HistoricServiceTests {
     public void deveRetornarFalsoQuandoDNANaoForEncontradoNaBase() {
         when(repository.findByDna(VALID_SIMIAN_DNA)).thenReturn(EMPTY_HISTORIC_LIST);
         Assert.assertFalse(service.dnaExists(VALID_SIMIAN_DNA));
+    }
+
+    @Test
+    public void deveRetornarVerdadeiroQuandoDNAForSimian() {
+        Assert.assertTrue(service.isSimian(VALID_SIMIAN_DNA_LIST));
     }
 }
