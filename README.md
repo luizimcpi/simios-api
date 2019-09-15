@@ -7,7 +7,21 @@ JAVA 8 and Spring Boot API
 ** Run all the commands bellow inside the root directory of this project
 
 
-First Time Configuration:
+
+## LOCAL INSTRUCTIONS
+
+*Execute tests*
+```
+./gradlew test
+```
+
+*Run*
+```
+./gradlew bootRun
+```
+
+
+## DOCKER INSTRUCTIONS
 
 Build
 ```
@@ -16,7 +30,7 @@ Build
 
 Generate Docker Application Image:
 ```
-docker build -t musicapi .
+docker build -t simianapi .
 ```
 
 Now start all enviroment:
@@ -25,44 +39,45 @@ Now start all enviroment:
 docker-compose up
 ```
 
-CHECK HEALTH STATUS EXAMPLE(LOCAL):
+### LOCAL ENDPOINTS
+CHECK HEALTH STATUS EXAMPLE:
 
 ```
 GET
 http://localhost:8080/actuator/health
 ```
 
-CREATE NEW DNA HEALTH STATUS EXAMPLE (LOCAL):
+CREATE NEW DNA HEALTH STATUS EXAMPLE:
 
 ```
 POST
 http://localhost:8080/simian
 ```
 
-GET STATS EXAMPLE (LOCAL):
+GET STATS EXAMPLE:
 
 ```
 GET
 http://localhost:8080/stats
 ```
 
-*HEROKU ENDPOINTS*
+### HEROKU ENDPOINTS
 
-CHECK HEALTH STATUS EXAMPLE(LOCAL):
+CHECK HEALTH STATUS EXAMPLE:
 
 ```
 GET
 https://simios-api.herokuapp.com/actuator/health
 ```
 
-CREATE NEW DNA HEALTH STATUS EXAMPLE (LOCAL):
+CREATE NEW DNA HEALTH STATUS EXAMPLE:
 
 ```
 POST
 https://simios-api.herokuapp.com/simian
 ```
 
-GET STATS EXAMPLE (LOCAL):
+GET STATS EXAMPLE:
 
 ```
 GET

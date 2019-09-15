@@ -1,0 +1,7 @@
+version: '3.4'
+services:
+  app:
+    image: simianapi
+    container_name: app-simian-api
+    ports:
+      - 8080:8080
