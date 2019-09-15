@@ -1,6 +1,5 @@
 package com.meli.simiosapi.controller;
 
-import com.meli.simiosapi.contracts.request.SimianRequest;
 import com.meli.simiosapi.contracts.response.StatsResponse;
 import com.meli.simiosapi.service.StatsService;
 import org.junit.Assert;
